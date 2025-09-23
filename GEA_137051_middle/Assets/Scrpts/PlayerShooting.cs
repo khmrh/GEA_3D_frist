@@ -9,7 +9,11 @@ public class PlayerShooting : MonoBehaviour
     public Transform FirePont;          //발사 위치 (총구)
     Camera cam;
 
-    public float Switch = 0f;
+    public int SwitchWeapon = 0; //무기 교체
+
+    // 쿨타임용 변수 
+    public float cooldowntimewapon = 2.0f; //무기 쿨타임
+    public float nextfiretime = 0f; //다음 발사 시간
 
     void Start()
     {
@@ -20,16 +24,24 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            
-        }
-        else
-        {
-
+            SwitchWeapon = (SwitchWeapon + 1) % ProjectilePrefab.Length; //무기 교체
+            Debug.Log("무기 스위칭");
         }
 
         if (Input.GetMouseButtonDown(0))//좌클릭 발사
         {
-            Shoot();
+            if (SwitchWeapon == 1 && Time.time < nextfiretime)
+            {
+                Debug.Log("쿨타임");
+                return;
+            }
+
+            Shoot(ProjectilePrefab[SwitchWeapon]);
+
+            if (SwitchWeapon == 1)
+            {
+                nextfiretime = Time.time + cooldowntimewapon; //쿨타임 설정
+            }
         }
     }
 
