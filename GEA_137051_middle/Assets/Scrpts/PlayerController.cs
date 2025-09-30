@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using UnityEditor.Purchasing;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,13 +17,21 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     public bool isGrounded;
 
+    public int MaxHP = 100;
+    private int currentHP;
+
+    public Slider HPSlider;
+
     public CinemacineSwitcher switcher;
 
     public CinemachineVirtualCamera fpsCam;
-
+    CinemachinePOV pov;
     void Start()
     {
         controller = GetComponent<CharacterController>();
+
+        currentHP = MaxHP;
+        HPSlider.value = 1f;
     }
 
     void Update()
@@ -90,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
         if (switcher.activeCamIndex == 0 || switcher.activeCamIndex == 2)
         {
-            CinemachinePOV pov = null;
+            pov = null;
 
             if (switcher.activeCamIndex == 0)
             {
@@ -115,5 +125,27 @@ public class PlayerController : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.Tab) && pov != null)
+        {
+            pov.m_HorizontalAxis.Value = transform.eulerAngles.y;
+            pov.m_VerticalAxis.Value = 0f;
+        }
+    }
+
+    public void TakeDamege(int damege)
+    {
+        currentHP -= damege;
+        HPSlider.value = (float)currentHP / MaxHP;
+
+        if (currentHP < 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }
