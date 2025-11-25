@@ -72,5 +72,19 @@ public class NoisevoxcelMap : MonoBehaviour
         b.mineable = true;
     }
 
-    
+    public void PleaceTile(Vector3Int pos, BlockType type)
+    {
+        switch (type)
+        {
+            case BlockType.Dirt:
+                PlaseDirt(pos.x, pos.y, pos.z);
+                break;
+            case BlockType.Grass:
+                PlaseGrass(pos.x, pos.y, pos.z);
+                break;
+            case BlockType.Water:
+                PlaseWater(pos.x, pos.y, pos.z);
+                break;
+        }
+    }
 }

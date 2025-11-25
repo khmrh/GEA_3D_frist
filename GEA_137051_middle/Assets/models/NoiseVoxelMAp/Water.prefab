@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8986410726942096116}
   - component: {fileID: 878931887393531180}
   - component: {fileID: 4345880646034491927}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9176698298727654901}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
