@@ -54,7 +54,7 @@ public class NoisevoxcelMap : MonoBehaviour
         go.name = $"Dirt_{x}_{y}_{z}";
 
         var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
-        b.type = BlockType.Dirt;
+        b.type = ItemType.Dirt;
         b.maxHP = 3;
         b.dropCount = 1;
         b.mineable = true;
@@ -66,23 +66,23 @@ public class NoisevoxcelMap : MonoBehaviour
         go.name = $"Grass_{x}_{y}_{z}";
 
         var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
-        b.type = BlockType.Grass;
+        b.type = ItemType.Grass;
         b.maxHP = 3;
         b.dropCount = 1;
         b.mineable = true;
     }
 
-    public void PleaceTile(Vector3Int pos, BlockType type)
+    public void PleaceTile(Vector3Int pos, ItemType type)
     {
         switch (type)
         {
-            case BlockType.Dirt:
+            case ItemType.Dirt:
                 PlaseDirt(pos.x, pos.y, pos.z);
                 break;
-            case BlockType.Grass:
+            case ItemType.Grass:
                 PlaseGrass(pos.x, pos.y, pos.z);
                 break;
-            case BlockType.Water:
+            case ItemType.Water:
                 PlaseWater(pos.x, pos.y, pos.z);
                 break;
         }

@@ -64,8 +64,8 @@ public class PlayerHarvester : MonoBehaviour
                 {
                     Vector3Int PlacePos = AdjacentCellOnHitFace(hit);
 
-                    BlockType selected = invenUI.GetInventorySlot();
-                    if (inventory.cosume(selected, 1))
+                    ItemType selected = invenUI.GetInventorySlot();
+                    if (inventory.Consume(selected, 1))
                     {
                         FindObjectOfType<NoisevoxcelMap>().PleaceTile(PlacePos, selected);
                     }

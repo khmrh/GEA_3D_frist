@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public Dictionary<BlockType, int> items = new();
+    public Dictionary<ItemType, int> items = new();
 
     public InventoryUI inventoryUI;
 
-    private void Start()
+    public void Start()
     {
         if (inventoryUI == null)
         {
@@ -20,11 +20,17 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void add(BlockType type, int count = 1)
+    public int GetCount(ItemType id)
+    {
+        items.TryGetValue(id, out var count);
+        return count;
+    }
+
+    public void add(ItemType type, int count = 1)
     {
         if (!items.ContainsKey(type)) items[type] = 0;
         items[type] += count;
-        Debug.Log($"[Inventory] +{count} {type} (รั {items[type]}");
+        Debug.Log($"[Inventory] +{count} {type} (รั {items[type]})");
 
         if (inventoryUI != null)
         {
@@ -32,7 +38,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool cosume(BlockType type, int count = 1)
+    public bool Consume(ItemType type, int count = 1)
     {
         if (!items.TryGetValue(type, out var have) || have < count) return false;
         items[type] = have - count;

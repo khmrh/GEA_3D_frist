@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public enum BlockType { Dirt, Grass, Water}
+public enum ItemType { Dirt, Grass, Water, Fshovel, Tshovel, Sshovel}
 public class Block : MonoBehaviour
 {
     [Header("Block stat")]
-    public BlockType type = BlockType.Dirt;
+    public ItemType type = ItemType.Dirt;
     public int maxHP = 3;
     [HideInInspector] public int hp;
 

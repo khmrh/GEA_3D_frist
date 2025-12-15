@@ -9,6 +9,9 @@ public class InventoryUI : MonoBehaviour
     public Sprite dirtsprite;
     public Sprite watersprite;
     public Sprite grasssprite;
+    public Sprite fshovelsprite;
+    public Sprite tshovelsprite;
+    public Sprite sshovelsprite;
 
     public List<Transform> slot = new List<Transform>();
     public GameObject SlotItem;
@@ -33,14 +36,23 @@ public class InventoryUI : MonoBehaviour
 
             switch (item.Key)
             {
-                case BlockType.Dirt:
+                case ItemType.Dirt:
                     sItem.itemSetting(dirtsprite, "x" + item.Value.ToString(), item.Key);
                     break;
-                case BlockType.Grass:
+                case ItemType.Grass:
                     sItem.itemSetting(grasssprite, "x" + item.Value.ToString(), item.Key);
                     break;
-                case BlockType.Water:
+                case ItemType.Water:
                     sItem.itemSetting(watersprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Fshovel:
+                    sItem.itemSetting(fshovelsprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Tshovel:
+                    sItem.itemSetting(tshovelsprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Sshovel:
+                    sItem.itemSetting(sshovelsprite, "x" + item.Value.ToString(), item.Key);
                     break;
             }
             idx++;
@@ -92,7 +104,7 @@ public class InventoryUI : MonoBehaviour
         slot[_idx].GetComponent<Image>().color = Color.yellow;
     }
 
-    public BlockType GetInventorySlot()
+    public ItemType GetInventorySlot()
     {
         return items[selectedIndex].GetComponent<SlotitemPreFab>().BlockType;
     }
