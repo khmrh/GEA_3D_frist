@@ -32,12 +32,20 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    //public bool cosume(BlockType type, int count = 1)
-    //{
-    //    if (items.TryGetValue(type, out var have) || have < count) return false;
-    //    items[type] = have - count;
-    //    Debug.Log($"[Inventory] -{count} {type} (รั {items[type]}");
-    //    return true;
-    //}
+    public bool cosume(BlockType type, int count = 1)
+    {
+        if (!items.TryGetValue(type, out var have) || have < count) return false;
+        items[type] = have - count;
+        Debug.Log($"[Inventory] -{count} {type} (รั {items[type]}");
+        if (items[type] == 0)
+        {
+            items.Remove(type);
+            inventoryUI.selectedIndex = -1;
+            inventoryUI.RssetSelection();
+        }
+
+        inventoryUI.UpdateInventory(this);
+        return true;
+    }
 
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6804327892522150976}
   - component: {fileID: 7739193209304066561}
   - component: {fileID: 7112962623678279002}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9007097950372791550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
