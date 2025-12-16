@@ -9,6 +9,9 @@ public class InventoryUI : MonoBehaviour
     public Sprite dirtsprite;
     public Sprite watersprite;
     public Sprite grasssprite;
+    public Sprite Woodsprite;
+    public Sprite Ironsprite;
+    public Sprite Diamondsprite;
     public Sprite fshovelsprite;
     public Sprite tshovelsprite;
     public Sprite sshovelsprite;
@@ -47,6 +50,15 @@ public class InventoryUI : MonoBehaviour
                     break;
                 case ItemType.Fshovel:
                     sItem.itemSetting(fshovelsprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Wood:
+                    sItem.itemSetting(Woodsprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Iron:
+                    sItem.itemSetting(Ironsprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Diamond:
+                    sItem.itemSetting(Diamondsprite, "x" + item.Value.ToString(), item.Key);
                     break;
                 case ItemType.Tshovel:
                     sItem.itemSetting(tshovelsprite, "x" + item.Value.ToString(), item.Key);

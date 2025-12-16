@@ -6,10 +6,16 @@ public class NoisevoxcelMap : MonoBehaviour
     public GameObject blockPrefabDirt;
     public GameObject blockPrefabGrass;
     public GameObject blockPrefabwater;
-    public int width = 200;
-    public int depth = 200;
-    public int maxHeight = 160;
-    public int waterLevel = 40;
+    public GameObject blockPrefabWood;
+    public GameObject blockPrefabIron;
+    public GameObject blockPrefabDiamond;
+    public int width = 20;
+    public int depth = 20;
+    public int maxHeight = 16;
+    public int waterLevel = 4;
+    public int woodLevel = 3;
+    public int IronLevel = 8;
+    public int diamondLevel = 4;
 
     [SerializeField] float noiseScale = 20f;
 
@@ -37,6 +43,18 @@ public class NoisevoxcelMap : MonoBehaviour
                 for (int y = h + 1; y <= waterLevel; y++)
                 {
                     PlaseWater(x, y, z);
+                }
+                for (int y = h + 1; y <= woodLevel; y++)
+                {
+                    PlaseWood(x, y, z);
+                }
+                for (int y = h - 5; y <= IronLevel; y++)
+                {
+                    PlaseIron(x, y, z);
+                }
+                for (int y = h - 10; y <= diamondLevel; y++)
+                {
+                    PlaseDiamond(x, y, z);
                 }
             }
         }
@@ -68,6 +86,42 @@ public class NoisevoxcelMap : MonoBehaviour
         var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
         b.type = ItemType.Grass;
         b.maxHP = 3;
+        b.dropCount = 1;
+        b.mineable = true;
+    }
+
+    private void PlaseWood(int x, int y, int z)
+    {
+        var go = Instantiate(blockPrefabWood, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"Wood_{x}_{y}_{z}";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = ItemType.Wood;
+        b.maxHP = 5;
+        b.dropCount = 1;
+        b.mineable = true;
+    }
+
+    private void PlaseIron(int x, int y, int z)
+    {
+        var go = Instantiate(blockPrefabIron, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"Iron_{x}_{y}_{z}";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = ItemType.Iron;
+        b.maxHP = 10;
+        b.dropCount = 1;
+        b.mineable = true;
+    }
+
+    private void PlaseDiamond(int x, int y, int z)
+    {
+        var go = Instantiate(blockPrefabDiamond, new Vector3(x, y, z), Quaternion.identity, transform);
+        go.name = $"Diamond_{x}_{y}_{z}";
+
+        var b = go.GetComponent<Block>() ?? go.AddComponent<Block>();
+        b.type = ItemType.Diamond;
+        b.maxHP = 15;
         b.dropCount = 1;
         b.mineable = true;
     }

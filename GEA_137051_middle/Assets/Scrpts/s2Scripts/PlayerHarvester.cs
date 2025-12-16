@@ -48,6 +48,9 @@ public class PlayerHarvester : MonoBehaviour
                 case ItemType.Dirt:
                 case ItemType.Water:
                 case ItemType.Grass:
+                case ItemType.Wood:
+                case ItemType.Iron:
+                case ItemType.Diamond:
                     Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
                     if (Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
                     {

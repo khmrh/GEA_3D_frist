@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemType { Dirt, Grass, Water, Fshovel, Tshovel, Sshovel, Null}
+public enum ItemType { Dirt, Grass, Water, Fshovel, Tshovel, Sshovel, Null, Wood, Iron, Diamond}
 public class Block : MonoBehaviour
 {
     [Header("Block stat")]

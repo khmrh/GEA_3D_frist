@@ -644,10 +644,19 @@ MonoBehaviour:
     type: 3}
   blockPrefabwater: {fileID: 8351337883104906215, guid: cc7829df1557bc64b9966bf5f068ad5b,
     type: 3}
-  width: 20
-  depth: 20
-  maxHeight: 16
+  blockPrefabWood: {fileID: 3782174439325961012, guid: bbeedf026d75f384cbc94aa82b62af7d,
+    type: 3}
+  blockPrefabIron: {fileID: 570961872929263911, guid: 4d0b1ec29a0522d4497b7422c7601601,
+    type: 3}
+  blockPrefabDiamond: {fileID: 1086865250227001485, guid: 901deb814455dfb4db565a318b5ea4f8,
+    type: 3}
+  width: 35
+  depth: 35
+  maxHeight: 20
   waterLevel: 4
+  woodLevel: 10
+  IronLevel: 5
+  diamondLevel: 1
   noiseScale: 20
 --- !u!4 &450229401
 Transform:
@@ -2164,7 +2173,7 @@ Transform:
   m_GameObject: {fileID: 1869897436}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 10, z: 10}
+  m_LocalPosition: {x: 15, y: 30, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2500,6 +2509,9 @@ MonoBehaviour:
   dirtsprite: {fileID: 21300000, guid: db8f460e9fe99234b97f7cad328d89e4, type: 3}
   watersprite: {fileID: 21300000, guid: a8768936769b01047869f31695168fd9, type: 3}
   grasssprite: {fileID: 21300000, guid: 07822a1abbcfcc5488a28b78cfb8227c, type: 3}
+  Woodsprite: {fileID: 21300000, guid: 7b96bcf3f4b845c4287cb2ebb603edce, type: 3}
+  Ironsprite: {fileID: 21300000, guid: 312ed81250522cf4785ea189a0954f40, type: 3}
+  Diamondsprite: {fileID: 21300000, guid: dd519ea94c022954db629c137d7fd977, type: 3}
   fshovelsprite: {fileID: 21300000, guid: 31594f328228ec84dba2ad91917bc570, type: 3}
   tshovelsprite: {fileID: 21300000, guid: f6247ffdf8e08b147a5ac128dab24238, type: 3}
   sshovelsprite: {fileID: 21300000, guid: bd4b8b959edff844ab784026fe00381f, type: 3}
