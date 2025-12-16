@@ -2189,9 +2189,8 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 8
-  toolDamge: 1
   hitCooldown: 0.15
-  inventory: {fileID: 0}
+  inventory: {fileID: 2100052440}
   selectedBlock: {fileID: 1065233398}
 --- !u!1 &1930937832
 GameObject:

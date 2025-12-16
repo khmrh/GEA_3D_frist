@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum ItemType { Dirt, Grass, Water, Fshovel, Tshovel, Sshovel}
+public enum ItemType { Dirt, Grass, Water, Fshovel, Tshovel, Sshovel, Null}
 public class Block : MonoBehaviour
 {
     [Header("Block stat")]
@@ -19,18 +19,45 @@ public class Block : MonoBehaviour
             gameObject.tag = "Block";
     }
 
-    public void Hit(int damage, Inventory inven)
+    public void Hit(ItemType _type , Inventory inven)
     {
         if (!mineable) return;
 
-        hp -= damage;
-
-        if (hp <= 0)
+        switch (_type)
         {
-            if (inven != null && dropCount > 0)
-                inven.add(type, dropCount);
+            case ItemType.Fshovel:
 
-            Destroy(gameObject);
+                if (inven != null && dropCount > 0)
+                    inven.add(type, dropCount + 2);
+
+                Destroy(gameObject);
+                break;
+            case ItemType.Tshovel:
+                if(inven != null && dropCount > 0)
+                        inven.add(type, dropCount + 4);
+
+                Destroy(gameObject);
+                break;
+            case ItemType.Sshovel:
+                if (inven != null && dropCount > 0)
+                    inven.add(type, dropCount + 6);
+
+                Destroy(gameObject);
+                break;
+            case ItemType.Null:
+
+                hp -= 1;
+
+                if (hp <= 0)
+                {
+                    if (inven != null && dropCount > 0)
+                        inven.add(type, dropCount);
+
+                    Destroy(gameObject);
+                }
+                break;
         }
+
+        
     }
 }

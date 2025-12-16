@@ -6,7 +6,6 @@ public class PlayerHarvester : MonoBehaviour
 {
     public float rayDistance = 5f;
     public LayerMask hitMask = ~0;
-    public int toolDamge = 1;
     public float hitCooldown = 0.15f;
     private float _nextHitTime;
     private Camera _cam;
@@ -36,39 +35,73 @@ public class PlayerHarvester : MonoBehaviour
                     var block = hit.collider.GetComponent<Block>();
                     if (block != null)
                     {
-                        block.Hit(toolDamge, inventory);
+                        block.Hit(ItemType.Null, inventory);
                     }
                 }
             }
         }
         else
         {
-            Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            if (Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
+            ItemType selectedType = invenUI.GetInventorySlot();
+            switch (selectedType)
             {
-                //Debug.DrawRay(hitDbug.point, hitDebug.nomal, color.red, 2f);
-                Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
-                selectedBlock.transform.localScale = Vector3.one;
-                selectedBlock.transform.position = placePos;
-                selectedBlock.transform.rotation = Quaternion.identity;
-            }
-            else
-            {
-                selectedBlock.transform.localScale = Vector3.zero;
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-                if (Physics.Raycast(ray, out var hit, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
-                {
-                    Vector3Int PlacePos = AdjacentCellOnHitFace(hit);
-
-                    ItemType selected = invenUI.GetInventorySlot();
-                    if (inventory.Consume(selected, 1))
+                case ItemType.Dirt:
+                case ItemType.Water:
+                case ItemType.Grass:
+                    Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                    if (Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
                     {
-                        FindObjectOfType<NoisevoxcelMap>().PleaceTile(PlacePos, selected);
+                        //Debug.DrawRay(hitDbug.point, hitDebug.nomal, color.red, 2f);
+                        Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
+                        selectedBlock.transform.localScale = Vector3.one;
+                        selectedBlock.transform.position = placePos;
+                        selectedBlock.transform.rotation = Quaternion.identity;
                     }
+                    else
+                    {
+                        selectedBlock.transform.localScale = Vector3.zero;
+                    }
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                        if (Physics.Raycast(ray, out var hit, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
+                        {
+                            Vector3Int PlacePos = AdjacentCellOnHitFace(hit);
+
+                            ItemType selected = invenUI.GetInventorySlot();
+                            if (inventory.Consume(selected, 1))
+                            {
+                                FindObjectOfType<NoisevoxcelMap>().PleaceTile(PlacePos, selected);
+                            }
+                        }
+                    }
+                    break;
+                case ItemType.Fshovel:
+                case ItemType.Tshovel:
+                case ItemType.Sshovel:
+                    Harvesting(selectedType);
+                    break;
+            }
+        }
+        
+    }
+
+    public void Harvesting(ItemType _type)
+    {
+
+        if (Input.GetMouseButtonDown(0) && Time.time >= _nextHitTime)
+        {
+            _nextHitTime = Time.time + hitCooldown;
+
+            Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.5f));
+            if (Physics.Raycast(ray, out var hit, rayDistance, hitMask))
+            {
+                var block = hit.collider.GetComponent<Block>();
+                if (block != null)
+                {
+                    block.Hit(_type, inventory);
+                    inventory.Consume(_type, 1);
                 }
             }
         }

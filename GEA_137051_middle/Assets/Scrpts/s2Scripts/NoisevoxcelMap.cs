@@ -6,10 +6,10 @@ public class NoisevoxcelMap : MonoBehaviour
     public GameObject blockPrefabDirt;
     public GameObject blockPrefabGrass;
     public GameObject blockPrefabwater;
-    public int width = 20;
-    public int depth = 20;
-    public int maxHeight = 16;
-    public int waterLevel = 4;
+    public int width = 200;
+    public int depth = 200;
+    public int maxHeight = 160;
+    public int waterLevel = 40;
 
     [SerializeField] float noiseScale = 20f;
 
